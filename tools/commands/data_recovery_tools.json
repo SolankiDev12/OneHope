@@ -1,0 +1,16 @@
+{
+    "tools": [
+        {
+            "name": "TestDisk",
+            "description": "Open-source data recovery software to recover lost partitions."
+        },
+        {
+            "name": "PhotoRec",
+            "description": "File data recovery software to recover lost files."
+        },
+        {
+            "name": "R-Linux",
+            "description": "A free data recovery software for Ext2/Ext3/Ext4 FS."
+        }
+    ]
+}

@@ -1,14 +1,16 @@
-[
-    {
-        "Description": "Scan all TCP ports on a target",
-        "Command": "nmap -p- TARGET"
-    },
-    {
-        "Description": "Perform OS detection and version detection",
-        "Command": "nmap -A TARGET"
-    },
-    {
-        "Description": "Scan multiple targets from a file",
-        "Command": "nmap -iL targets.txt"
-    }
-]
+{
+    "commands": [
+        {
+            "command": "nmap -sP <target-ip>",
+            "description": "Ping sweep of a target IP address."
+        },
+        {
+            "command": "nmap -sV <target-ip>",
+            "description": "Service version detection of the target IP address."
+        },
+        {
+            "command": "nmap -O <target-ip>",
+            "description": "OS detection of the target IP."
+        }
+    ]
+}

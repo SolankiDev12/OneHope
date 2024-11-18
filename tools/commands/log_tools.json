@@ -1,17 +1,16 @@
-[
-    {
-        "Name": "glog",
-        "Description": "A CLI-based log analyzer",
-        "Commands": [
-            "glog analyze LOG_FILE",
-            "glog visualize LOG_FILE"
-        ]
-    },
-    {
-        "Name": "lnav",
-        "Description": "Log Navigator",
-        "Commands": [
-            "lnav LOG_FILE"
-        ]
-    }
-]
+{
+    "tools": [
+        {
+            "name": "Logwatch",
+            "description": "A log analyzer and reporter to simplify the interpretation of logs."
+        },
+        {
+            "name": "GoAccess",
+            "description": "A real-time web log analyzer and interactive viewer."
+        },
+        {
+            "name": "Logrotate",
+            "description": "Log rotation tool to manage the size of logs."
+        }
+    ]
+}
