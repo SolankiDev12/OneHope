@@ -1,0 +1,17 @@
+[
+    {
+        "Name": "glog",
+        "Description": "A CLI-based log analyzer",
+        "Commands": [
+            "glog analyze LOG_FILE",
+            "glog visualize LOG_FILE"
+        ]
+    },
+    {
+        "Name": "lnav",
+        "Description": "Log Navigator",
+        "Commands": [
+            "lnav LOG_FILE"
+        ]
+    }
+]

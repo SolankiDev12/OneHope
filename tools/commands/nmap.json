@@ -1,0 +1,14 @@
+[
+    {
+        "Description": "Scan all TCP ports on a target",
+        "Command": "nmap -p- TARGET"
+    },
+    {
+        "Description": "Perform OS detection and version detection",
+        "Command": "nmap -A TARGET"
+    },
+    {
+        "Description": "Scan multiple targets from a file",
+        "Command": "nmap -iL targets.txt"
+    }
+]

@@ -5,6 +5,8 @@ param(
 )
 
 $scriptPath = Split-Path -Parent $MyInvocation.MyCommand.Path
+$scriptsPath = Join-Path $scriptPath "scripts"
+$toolsPath = Join-Path $scriptPath "tools"
 
 function Show-MainHelp {
     Write-Host "OneHope - Digital Forensics Toolkit" -ForegroundColor Cyan
@@ -13,46 +15,40 @@ function Show-MainHelp {
     Write-Host "  help [tool]        - Show help for specific tool"
     Write-Host "  scripts [category] - Generate scripts (network/process/memory/disk)"
     Write-Host "`nAvailable Tools:"
-    Write-Host "  nmap    - Network mapping and scanning commands"
-    Write-Host "  log     - Log analysis tools"
-    Write-Host "  process - Process analysis tools"
+    Get-ChildItem -Path $toolsPath -Filter "*.ps1" |
+        ForEach-Object { Write-Host "  $($_.BaseName)" }
 }
 
 function Show-ToolHelp {
     param([string]$toolName)
-    
-    switch ($toolName) {
-        "nmap" {
-            Write-Host "Nmap Tool Commands:" -ForegroundColor Cyan
-            Write-Host "  onehope nmap scan [ip]     - Basic network scan"
-            Write-Host "  onehope nmap service [ip]  - Service detection"
-        }
-        "log" {
-            Write-Host "Log Analysis Commands:" -ForegroundColor Cyan
-            Write-Host "  onehope log parse [file]   - Parse log file"
-            Write-Host "  onehope log search [term]  - Search in logs"
-        }
-        default {
-            Write-Host "Tool not found. Use 'onehope help' for available tools." -ForegroundColor Red
-        }
+
+    $toolFile = Join-Path $toolsPath "$toolName.ps1"
+    if (Test-Path $toolFile) {
+        Write-Host "$toolName Tool Commands:" -ForegroundColor Cyan
+        & $toolFile -help
+    } else {
+        Write-Host "Tool '$toolName' not found. Use 'onehope help' for available tools." -ForegroundColor Red
     }
 }
 
 function Generate-Scripts {
     param([string]$category)
-    
-    $scriptsPath = Join-Path $scriptPath "scripts\$category"
-    if (!(Test-Path $scriptsPath)) {
+
+    $categoryPath = Join-Path $scriptsPath $category
+    if (!(Test-Path $categoryPath)) {
         Write-Host "Invalid category. Available categories: network, process, memory, disk" -ForegroundColor Red
         return
     }
-    
-    Write-Host "Generating $category scripts..." -ForegroundColor Green
-    # Add script generation logic here
+
+    Write-Host "Generating scripts for category: $category..." -ForegroundColor Green
+    # Invoke script generation logic for each script in the category folder
+    Get-ChildItem -Path $categoryPath -Filter "*.ps1" | ForEach-Object {
+        & $_.FullName
+    }
 }
 
 # Main command processing
-switch ($command) {
+switch ($command.ToLower()) {
     "help" {
         if ($tool) {
             Show-ToolHelp $tool
@@ -68,6 +64,7 @@ switch ($command) {
         }
     }
     default {
+        Write-Host "Invalid command: $command. Use 'help' to see available commands." -ForegroundColor Red
         Show-MainHelp
     }
 }

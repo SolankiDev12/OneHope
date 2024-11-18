@@ -1,0 +1,5 @@
+PSScriptAnalyzer  # Ensures scripts adhere to PowerShell best practices
+Pester            # Testing framework for PowerShell scripts
+Nmap              # Network scanning tool
+SysinternalsSuite # Tools for advanced system troubleshooting
+LogParser         # Log file analysis tool
